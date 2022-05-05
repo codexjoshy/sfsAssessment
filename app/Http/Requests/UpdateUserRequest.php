@@ -24,13 +24,13 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "firstname" => "sometimes|nullable|required|string",
-            "lastname" => "sometimes|nullable|required|string",
-            "email" => "sometimes|nullable|required|email|unique:users,email," . request()->user()->id,
-            "phone" => "sometimes|nullable|required|numeric|min:11|unique:users,phone," . request()->user()->id,
-            "password" => "sometimes|nullable|required|min:6",
-            "gender" => "sometimes|nullable|required|in:male,female",
-            "job" =>  "sometimes|nullable|required|string",
+            "firstname" => "sometimes|nullable|string",
+            "lastname" => "sometimes|nullable|string",
+            "email" => "sometimes|nullable|email|unique:users,email," . request()->user()->id,
+            "phone" => "sometimes|nullable|numeric|min:11|unique:users,phone," . request()->user()->id,
+            "password" => "sometimes|nullable|min:6",
+            "gender" => "sometimes|nullable|in:male,female",
+            "job" =>  "sometimes|nullable|string",
 
         ];
     }

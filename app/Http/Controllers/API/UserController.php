@@ -35,11 +35,17 @@ class UserController extends BaseController
     {
         $input = $request->validated();
         $user = $request->user();
-        if ($request->password) {
-            $input['password'] = bcrypt($input['password']);
+        $data = [];
+        try {
+            if ($request->password) {
+                $input['password'] = bcrypt($input['password']);
+            }
+            $user->update($input);
+            $data['user'] = new UserResource(Auth::user());
+        } catch (\Throwable $th) {
+            return $this->sendError('error in the data submitted', $th->getMessage());
         }
-        $user->update($input);
-        $data['user'] = new UserResource(Auth::user());
+
         return $this->sendResponse($data, 'User updated successfully.');
     }
     public function uploadImage(Request $request, User $user)
